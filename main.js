@@ -35,16 +35,16 @@ $(function() {
     // Each received "like" is indicated by the timepoint (in ms) at which the "like" will appear. To change the number of "likes" in each condition, add or remove timepoints. Make sure that every timepoint (except the first) is preceded by a single comma. 
 	// In cases with only 1 "like," a second "like" is added with time point 9999999. This "like" is added for programming purposes and is never executed, as it is outside the task time
 
-    // In condition 1, the participant will receive 1 like at the following timepoint (in ms). Default: [12000, 9999999]
-    settings.condition_1_likes = [12000, 9999999]; 
+    // In condition 4, the participant will receive 1 like at the following timepoint (in ms). Default: [12000, 9999999]
+    settings.condition_4_likes = [12000, 9999999]; 
     
-    // In condition 3, user will receive 5 likes at the following timepoints (in ms). Default: [10000, 11000,35000,100000,110000,20000]
-    settings.condition_3_likes = [10000, 11000,35000,100000,110000,20000]; 
+    // In condition 6, user will receive 5 likes at the following timepoints (in ms). Default: [10000, 11000,35000,100000,110000,20000]
+    settings.condition_6_likes = [10000, 11000,35000,100000,110000,20000]; 
 
 	// **Others' likes**     
 	// To keep the total distribution of "likes" constant across conditions, The "likes" received by one group member can be adjusted according to the participant's. By default, the other group member receives 9 "likes" in the participant-ostracism condition, 5 in the participant-inclusion condtion, and 1 in the participant-overinclusion condtion.
-	settings.condition_1_adjusted_likes = [12000, 14000,15000,35000,80000,100000,110000,150000,20000]; // 9
-	settings.condition_3_adjusted_likes = [12000, 9999999]; //1	
+	settings.condition_4_adjusted_likes = [12000, 14000,15000,35000,80000,100000,110000,150000,20000]; // 9
+	settings.condition_6_adjusted_likes = [12000, 9999999]; //1	
 	
     // Usernames by which the participant will receive "likes"
 	// If group member names are changed, these should be changed accordingly.
@@ -327,10 +327,10 @@ $(function() {
   // Get URL parameters to set condition number and participant number
   function get_params() {
     // condition number must be 1, or 3
-    if(window.QueryString.c !== undefined && !isNaN(parseInt(window.QueryString.c)) && parseInt(window.QueryString.c) > 0 && parseInt(window.QueryString.c) < 4) {
+    if(window.QueryString.c !== undefined && !isNaN(parseInt(window.QueryString.c)) && parseInt(window.QueryString.c) > 3 && parseInt(window.QueryString.c) < 7) {
       window.condition = parseInt(window.QueryString.c);
     } else {
-      window.condition = 1; // condition defaults to 1
+      window.condition = 4; // condition defaults to 4
     }
     // participant number must be numeric
     if(window.QueryString.p !== undefined && !isNaN(parseInt(window.QueryString.p))) {
@@ -360,17 +360,17 @@ $(function() {
     // the number of likes a person receives depends on the condition
 	// in addition, the number of likes another person receives is adjusted, so that there is the same number of likes overall
 	switch(condition) {
-		case 1:
-			window.settings.condition_likes = settings.condition_1_likes;
-			window.others.posts[1].likes = settings.condition_1_adjusted_likes;
+		case 4:
+			window.settings.condition_likes = settings.condition_4_likes;
+			window.others.posts[1].likes = settings.condition_4_adjusted_likes;
 			break;
-		case 2:
-			window.settings.condition_likes = settings.condition_2_likes;
-			window.others.posts[1].likes = settings.condition_2_adjusted_likes;
+		case 5:
+			window.settings.condition_likes = settings.condition_5_likes;
+			window.others.posts[1].likes = settings.condition_5_adjusted_likes;
 			break;
-		case 3:
-			window.settings.condition_likes = settings.condition_3_likes;
-			window.others.posts[1].likes = settings.condition_3_adjusted_likes;
+		case 6:
+			window.settings.condition_likes = settings.condition_6_likes;
+			window.others.posts[1].likes = settings.condition_6_adjusted_likes;
 			break;
 	}	
 	  
